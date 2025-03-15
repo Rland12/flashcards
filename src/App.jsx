@@ -1,47 +1,94 @@
 import { useState } from 'react';
+import * as fuzz from 'fuzzball';
 import Card from "./components/Card";
 import './App.css';
 
 function App() {
   // List of flashcards
   const cards = [
-    { question: "What is the most powerful piece in chess?", answer: "The Queen" },
-    { question: "How does a knight move?", answer: "In an L-shape" },
-    { question: "What is castling?", answer: "A special move with the king and rook" },
-    { question: "What is en passant?", answer: "A special pawn capture rule" },
-    { question: "What is checkmate?", answer: "When the king has no escape and is attacked" }
+    { question: "What piece moves in an L shape?", answer: "Knight" },
+    { question: "What is the most powerful piece?", answer: "Queen" },
+    { question: "Which piece moves diagonally?", answer: "Bishop" }
+
   ];
 
   // State to track the current card index
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false); // Toggle between question/answer
+  const [userGuess, setUserGuess] = useState("");
+  const [feedback, setFeedback] = useState("");
 
-  // Function to show next random card
-  const nextCard = () => {
-    let newIndex;
-    do {
-      newIndex = Math.floor(Math.random() * cards.length);
-    } while (newIndex === currentCardIndex); // Prevent same card appearing twice in a row
-    setCurrentCardIndex(newIndex);
-    setShowAnswer(false); // Reset to question side
+   // Function to handle guess submission
+   const handleSubmit = () => {
+    const correctAnswer = cards[currentCardIndex].answer.toLowerCase().trim();
+    const guess = userGuess.toLowerCase().trim();
+
+     // Use fuzzy matching with a threshold (e.g., 80 for good similarity)
+     const similarity = fuzz.ratio(guess, correctAnswer);
+
+     if (similarity >= 80) {
+       setFeedback("✅ Correct!");
+       setShowAnswer(true);
+     } else {
+       setFeedback("❌ Incorrect! Try again.");
+     }
+  };
+
+  // Move to next card
+  const handleNext = () => {
+    if (currentCardIndex < cards.length - 1) {
+      setCurrentCardIndex(currentCardIndex + 1);
+      resetState();
+    }
+  };
+
+  // Move to previous card
+  const handleBack = () => {
+    if (currentCardIndex > 0) {
+      setCurrentCardIndex(currentCardIndex - 1);
+      resetState();
+    }
+  };
+
+  // Reset state when switching cards
+  const resetState = () => {
+    setShowAnswer(false);
+    setUserGuess("");
+    setFeedback("");
   };
 
   return (
     <div className="app">
-      <h1>Chess Flashcards</h1>
-      <p>Understand chess pieces and techniques. Total Cards: {cards.length}</p>
+     <h1>Chess Flashcards</h1>
+      <p>Learn chess pieces and techniques!</p>
+      <Card 
+        question={cards[currentCardIndex].question} 
+        answer={cards[currentCardIndex].answer}
+        showAnswer={showAnswer} 
+      />
       
-       {/* Clicking the card toggles between question and answer  */}
-      <div onClick={() => setShowAnswer(!showAnswer)}>
-        <Card 
-          question={cards[currentCardIndex].question} 
-          answer={cards[currentCardIndex].answer}
-          showAnswer={showAnswer} // Pass as prop
-        />
-      </div>
+      {/* User input for guessing */}
+      {!showAnswer && (
+        <div className="input-container">
+          <input 
+            type="text" 
+            placeholder="Enter your answer..." 
+            value={userGuess} 
+            onChange={(e) => setUserGuess(e.target.value)}
+          />
+          <button onClick={handleSubmit}>Submit</button>
+        </div>
+      )}
+      
+      
+      {/* Feedback */}
+      <p className="feedback">{feedback}</p>
 
-      {/* Button to show a new random card */}
-      <button onClick={nextCard} className="next-btn">Next Card</button>
+      {/* Navigation buttons */}
+      <div className="nav-buttons">
+        <button onClick={handleBack} disabled={currentCardIndex === 0}>Back</button>
+        <button onClick={handleNext} disabled={currentCardIndex === cards.length - 1}>Next</button>
+      </div>
     </div>
   );
 }

@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "fuzzball": "^2.1.6",
+    "install": "^0.13.0",
+    "npm": "^11.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },

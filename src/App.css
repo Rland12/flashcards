@@ -58,19 +58,41 @@
   transform: rotateY(180deg);
 }
 
-.next-btn {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
+
+.input-container {
+  margin: 10px;
 }
 
-.next-btn:hover {
-  background-color: #45a049;
+input {
+  padding: 8px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.feedback {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.nav-buttons {
+  margin-top: 15px;
+}
+
+.nav-buttons button {
+  margin: 5px;
 }

@@ -1,4 +1,4 @@
-# Web Development Project 2 - *Chess Flash Cards*
+# Web Development Project 2 & 3- *Chess Flash Cards*
 
 Submitted by: **Rashad Landrum**
 
@@ -16,11 +16,21 @@ The following **required** functionality is completed:
 - [X] **Clicking on the card shows the corresponding component of the information pair**
 - [X] **Clicking the next button displays a random new card**
 
+## Project 3 functionality
+
+- [X] **The user can enter their guess in a box before seeing the flipside of the card**
+- [X] **Clicking on a submit button shows visual feedback about whether the answer was correct or incorrect**
+- [X] **A back button is displayed on the card and can be used to return to the previous card in a set sequence**
+- [X] **A next button is displayed on the card and can be used to navigate to the next card in a set sequence**
+
 The following **optional** features are implemented:
 
 - [ ] Cards contains images in addition to or in place of text
 - [ ] Cards have different visual styles such as color based on their category
   - [X] *visual style implemented*
+
+  ## Project 3 optional feature
+- [X] A user’s answer may be counted as correct even when it is slightly different from the target answer
 
 The following **additional** features are implemented:
 
@@ -32,6 +42,8 @@ Here's a walkthrough of implemented required features:
 
 <img src='./src/assets/codepathproject2.gif' width='' alt='Video Walkthrough' />
 
+## Project 3 video
+<img src='./src/assets/codepathproject3.gif' width='' alt='Video Walkthrough' />
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  
 
